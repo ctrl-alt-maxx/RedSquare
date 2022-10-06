@@ -1,2 +1,2 @@
 # RedSquare
-the red square is red not blue i swear
+Groupe H:Eddee Charles, Usha Shivannie Sookwa, Maxime Rabbat
