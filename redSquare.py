@@ -36,9 +36,7 @@ root.title("Jeu du carré rouge")
 # Fixe la taille de la fenetre en pixel
 root.geometry("1000x1000")
 
-menu  = tk.Label(root, text="Menu: Faites un choix:", background="white", foreground="black", padx="50", pady="100")
 
-menu.grid(column=0, row=0)
 
 # Bouton
 def fooBouton(button):
@@ -90,10 +88,21 @@ canvas.grid(column=0, row=0)
 carre = c31.Carre(canvas, c31.Vecteur(225, 225), 40, remplissage="red")
 carre.draw()
 
-canvas2 = tk.Canvas(canvas, background="pink", width=450, height=450, highlightthickness=1, highlightbackground="black")
-canvas2.draw()
+startscreen = c31.Carre(canvas, c31.Vecteur(225,225),600,remplissage="pink")
+startscreen.draw()
 
+    
 
+def Start():
+   startscreen.resize(0)
+   startscreen.draw()
+   buttonStart.widget.grid_remove()
+   
+
+    
+
+buttonStart = tk.Button(root,text="Start",command=Start)
+buttonStart.grid(column=0, row=0)
 
 
 def log(var, e):
