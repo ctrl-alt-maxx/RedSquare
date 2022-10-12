@@ -2,7 +2,7 @@
 from functools import partial
 import tkinter as tk
 from tkinter import Canvas, Label, Menu, Tk, ttk
-from turtle import width
+from tkinter import messagebox
 import c31Geometry2 as c31
 
 
@@ -27,6 +27,7 @@ root = tk.Tk()
 #button =ttk.Button(root, text="quit", command=root.destroy)
 
 
+
 # Background color
 root.config(background="royalblue")
 
@@ -44,6 +45,8 @@ menu.grid(column=0, row=0)
 def fooBouton(button):
    print("Votre choix: " + button)
 
+buttonStart = tk.Button(root, text="start", command=fooBouton, width=8)
+buttonStart.grid(column=1, row=0)
 
 button = tk.Button(root, text="1. Facile", command=fooBouton, width=8)
 button.grid(column=1, row=1)
@@ -56,6 +59,13 @@ button3.grid(column=1, row=3)
 
 buttonQuit = tk.Button(root, text="Quitter", command=fooBouton, width=8)
 buttonQuit.grid(column=1, row=4)
+
+
+#def hello():
+ #   messagebox.showinfo("Choose a difficulty")
+
+#b1 = tk.Button(root, text = "Start", command=hello)
+#b1.pack()
 
 
 # Creating canvas 
@@ -86,12 +96,25 @@ rectangle4.draw()
 
 canvas.grid(column=0, row=0)
 
+def log(var, e):
+    print(var)
 
 
 carre = c31.Carre(canvas, c31.Vecteur(225, 225), 40, remplissage="red")
 carre.draw()
 
+loop = c31.LoopEvent(root, partial(log, "Cliquez-Loop", None), 1000)
+loop.start()
 
+def mvt(forme):
+    forme.translate(c31.Vecteur(4, 0))
+    #forme.translateTo(c31.Vecteur(4,0), c31.Vecteur(5,10))
+    forme.draw()
+    forme.translate(c31.Vecteur(5, 10))
+    
+
+loop2 = c31.LoopEvent(canvas, partial(mvt, carre))
+loop2.start()
 
 
 

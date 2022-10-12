@@ -4,8 +4,6 @@ from random import choice
 from functools import partial
 import c31Geometry2 as c31
 
-
-
 root = tk.Tk()
 
 # Background color
