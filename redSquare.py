@@ -88,8 +88,8 @@ canvas.grid(column=0, row=0)
 carre = c31.Carre(canvas, c31.Vecteur(225, 225), 40, remplissage="red")
 carre.draw()
 
-startscreen = c31.Carre(canvas, c31.Vecteur(225,225),600,remplissage="pink")
-startscreen.draw()
+# startscreen = c31.Carre(canvas, c31.Vecteur(225,225),600,remplissage="pink")
+# # startscreen.draw()
 
 # def hide_me(event):
 #     event.widget.grid_forget()
@@ -107,17 +107,20 @@ startscreen.draw()
 # Play_Button1.place(x=54, y=157, width=61, height=61)
     
 
-def Start():
-   startscreen.resize(0)
-   startscreen.draw()
-   buttonStart.widget.grid_remove()
+# def Start():
+#    startscreen.resize(0)
+#    startscreen.draw()
+#    buttonStart.widget.grid_remove()
    
-buttonStart = tk.Button(root,text="Start",command=Start)
-buttonStart.grid(column=0, row=0)
+# buttonStart = tk.Button(root,text="Start",command=Start)
+# buttonStart.grid(column=0, row=0)
 
   
 def mvt(forme):
-    forme.translateTo(c31.Vecteur(85,350))
+   
+    forme.translateTo(c31.Vecteur(0,0))
+    forme.draw()
+    forme.translateTo(c31.Vecteur(0,4))
     forme.draw()
     
 loop2 = c31.LoopEvent(canvas,partial(mvt,rectangle2))
