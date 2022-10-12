@@ -91,6 +91,20 @@ carre.draw()
 startscreen = c31.Carre(canvas, c31.Vecteur(225,225),600,remplissage="pink")
 startscreen.draw()
 
+# def hide_me(event):
+#     event.widget.grid_forget()
+
+# def callback(Buttons):
+#    Buttons.bind('<Button>', hide_me)
+
+
+# def callback_and_hide(button):
+#     callback(Play_Button1)
+#     button.grid_forget()
+
+# Play_Button1 = Button(master = window,text='ㅤㅤ',command=lambda: callback_and_hide(Play_Button1))
+# Play_Button1.config(bg="white",fg="black")
+# Play_Button1.place(x=54, y=157, width=61, height=61)
     
 
 def Start():
@@ -98,11 +112,38 @@ def Start():
    startscreen.draw()
    buttonStart.widget.grid_remove()
    
-
-    
-
 buttonStart = tk.Button(root,text="Start",command=Start)
 buttonStart.grid(column=0, row=0)
+
+  
+def mvt(forme):
+    forme.translateTo(c31.Vecteur(85,350))
+    forme.draw()
+    
+loop2 = c31.LoopEvent(canvas,partial(mvt,rectangle2))
+loop2.start()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def log(var, e):
