@@ -58,11 +58,10 @@ buttonQuit = tk.Button(root, text="Quitter", command=fooBouton, width=8)
 buttonQuit.grid(column=1, row=4)
 
 
+
 # Creating canvas 
 canvas = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black")
 
-
-#canvas = c31.Carre(root, c31.Vecteur(450,450), 450, bordure="black", remplissage="white", epaisseur=50)
 
 
 
@@ -91,8 +90,8 @@ canvas.grid(column=0, row=0)
 carre = c31.Carre(canvas, c31.Vecteur(225, 225), 40, remplissage="red")
 carre.draw()
 
-
-
+canvas2 = tk.Canvas(canvas, background="pink", width=450, height=450, highlightthickness=1, highlightbackground="black")
+canvas2.draw()
 
 
 
@@ -101,8 +100,6 @@ def log(var, e):
     print(var)
 
 
-loop = c31.LoopEvent(root, partial(log, "Cliquez-loop", None), 1000)
-loop.start()
 
 
 root.mainloop()
