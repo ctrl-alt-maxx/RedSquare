@@ -94,19 +94,20 @@ def menu_popup(event):
         # Release the grab
         popup.grab_release()
 
-# Button 2 for MAC, button 3 for windows 
+# Button 2 for MAC, buttonPress-3 for windows 
 root.bind("<ButtonPress-2>", menu_popup)
 root.bind(canvas, "<ButtonPress-1>", partial(print, "allo"))
 root.bind("<ButtonPress-1>", partial(print, "pressed"))
 root.bind("<ButtonRelease>", partial(print, "released"))
-#root.bind("<B1-Motion>", partial(print, "dragged"), carre)
+root.bind("<B1-Motion>", partial(print, "dragged"))
 
 def drag(event) :
-    carre2.place(x=event.x_root, y=event.y_root)
+    event.widget.place(x=event.x_root, y=event.y_root, anchor=CENTER)
 
 carre2 = Canvas(root, width=40, height=40, bg="red")
-carre2.place(x=225, y=225)
+carre2.place(x=225, y=225, anchor=CENTER)
 carre2.bind("<B1-Motion>", drag)
+
 
 root.mainloop()
 
