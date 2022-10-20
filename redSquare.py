@@ -5,7 +5,7 @@ from tkinter import Canvas, Label, Menu, Tk, ttk
 from turtle import width
 import c31Geometry2 as c31
 
-
+go = bool(True)
 root = tk.Tk()
 
 # Pop-up window
@@ -115,44 +115,30 @@ carre.draw()
 # buttonStart = tk.Button(root,text="Start",command=Start)
 # buttonStart.grid(column=0, row=0)
 
+
+
+
+
+# VVVVVV CAN MODIFY FROM THIS POINT VVVVVV
   
-def mvt(forme):
-   
-    forme.translateTo(c31.Vecteur(0,0))
-    forme.draw()
-    forme.translateTo(c31.Vecteur(0,4))
-    forme.draw()
+def mvt(forme): forme.translateTo(c31.Vecteur(300,95))
+
+def update():
+    rectangle2.draw()
+
     
-loop2 = c31.LoopEvent(canvas,partial(mvt,rectangle2))
-loop2.start()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def log(var, e):
-    print(var)
-
-
+loop = c31.LoopEvent(canvas,partial(mvt,rectangle2),50)    
+     
+  
+     
+if rectangle2.get_position() == c31.Vecteur(300,95) :
+    go = bool(False)
+    
+if go == bool(True) : 
+    loop.start()
+    
+e = c31.LoopEvent(root, update, 100)
+e.startImmediately()  
 
 
 root.mainloop()
