@@ -1,7 +1,8 @@
 
 from functools import partial
 import tkinter as tk
-from tkinter import Label, Menu
+from tkinter import ANCHOR, CENTER, Canvas, Label, Menu, StringVar
+from turtle import width
 import c31Geometry2 as c31
 
 
@@ -47,8 +48,8 @@ def log(var, e):
     print(var)
 
 
-carre = c31.Carre(canvas, c31.Vecteur(225, 225), 40, remplissage="red")
-carre.draw()
+#carre = c31.Carre(canvas, c31.Vecteur(225, 225), 40, remplissage="red")
+#carre.draw()
 
 loop = c31.LoopEvent(root, partial(log, "Cliquez-Loop", None), 1000)
 loop.start()
@@ -59,9 +60,9 @@ def mvt(forme):
     forme.draw()
     forme.translate(c31.Vecteur(5, 10))
     
-
-loop2 = c31.LoopEvent(canvas, partial(mvt, carre))
-loop2.start()
+# Mouvement du carree rouge on its own
+#loop2 = c31.LoopEvent(canvas, partial(mvt, carre))
+#loop2.start()
 
 def log(var, e):
     print(var)
@@ -95,8 +96,19 @@ def menu_popup(event):
 
 # Button 2 for MAC, button 3 for windows 
 root.bind("<ButtonPress-2>", menu_popup)
+root.bind(canvas, "<ButtonPress-1>", partial(print, "allo"))
+root.bind("<ButtonPress-1>", partial(print, "pressed"))
+root.bind("<ButtonRelease>", partial(print, "released"))
+#root.bind("<B1-Motion>", partial(print, "dragged"), carre)
+
+def drag(event) :
+    carre2.place(x=event.x_root, y=event.y_root)
+
+carre2 = Canvas(root, width=40, height=40, bg="red")
+carre2.place(x=225, y=225)
+carre2.bind("<B1-Motion>", drag)
 
 root.mainloop()
 
 
-
+# REMISE 3 NOVEMBRE 2022
