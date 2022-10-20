@@ -23,7 +23,7 @@ canvas = tk.Canvas(root, background="white", width=450, height=450, highlightthi
 
 # DETERMINE LA VITTESE DES FORMES BLEUES AU DÉBUT DU JEU
 class Difficulté:
-    defaultSpeed = 2000
+    defaultSpeed = 0 # THE LOWER THE VALUE, THE CLEANNER THE MOVEMENT WITH FASTER SPEED
     def Facile(self):
         self.defaultSpeed = 1000
         self.color = "red"
@@ -31,12 +31,12 @@ class Difficulté:
         loop.start()
 
     def Moyen(self):
-        self.defaultSpeed = 500
+        self.defaultSpeed = 200
         loop = c31.LoopEvent(canvas,partial(mvt,rectangle2), self.defaultSpeed)
         loop.start()
         
     def Difficile(self):
-        self.defaultSpeed = 100
+        self.defaultSpeed = 50
         loop = c31.LoopEvent(canvas,partial(mvt,rectangle2), self.defaultSpeed)
         loop.start()
       
