@@ -37,9 +37,32 @@ root.title("Jeu du carré rouge")
 # Fixe la taille de la fenetre en pixel
 root.geometry("1000x1000")
 
-menu  = tk.Label(root, text="Menu: Faites un choix:", background="white", foreground="black", padx="50", pady="100")
+menu = tk.Label(root, text="Menu: Faites un choix:", background="white", foreground="black", padx="50", pady="100")
 
 menu.grid(column=0, row=0)
+
+label = Label(tk, text="Right-click anywhere to display a menu", font=("Helvetica 18"))
+label.pack(pady=40)
+
+# Add menu
+popup = Menu(tk, tearoff=0)
+
+# Adding items to the menu 
+popup.add_command(label="new")
+popup.add_command(label="edit")
+popup.add_separator()
+popup.add_command(label="save")
+
+def menu_popup(event):
+    try:
+        popup.tk_popup(event.x_root, event.y_root, 0)
+    finally:
+        popup.grab_release()
+
+root.bind("<ButtonPress-3>", menu_popup)
+
+button = tk.Button(tk, text="Quit", command=tk.destroy)
+button.pack()
 
 # Bouton
 def fooBouton(button):
