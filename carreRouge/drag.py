@@ -2,21 +2,39 @@ import tkinter as tk
 from tkinter import  *
 import c31Geometry2 as geo
 
-c31 = geo
-my_w = tk.Tk()
-my_w.geometry("450x450")  # width and height 
-def my_callback(event):
+root = tk.Tk()
+root.geometry("600x600") # width and height
+
+
+def mouvementCarre(event):
      l1.config(text='Position x : '+ str(event.x) +", y : "+ str(event.y))
+     # carre('<B1-Motion>')
+     # root.bind(, carre)
      
-     
-# def mvt(form):
-#     form.translate(c31.Vector(4,0))
-#     form.draw()     
+     c = tk.Canvas(root, width=450, height=450, background="green")
+     # c.grid()
+     c.pack()
+     g = geo.Carre(c, geo.Vecteur(int(event.x), int(event.y)), 50, remplissage="black") # c31.Vecteur(int(event.x), int(event.y))
+     g.draw()
+     geo.Vecteur.get_coordonnee(g)
+     # c31.LoopEvent(root, callback= lambda : carre)    
 
-my_w.title("Mouvement du carree rouge")
 
-l1 = tk.Label(my_w, text='to Display',bg='yellow',font=30)
+def carre(event):
+     c = tk.Canvas(root, width=450, height=450, background="green")
+     # c.pack()
+     carre = geo.Carre(c, geo.Vecteur(int(event.x), int(event.y)), 50, remplissage="black")
+     carre.draw()  
+
+
+root.title("Mouvement du carre rouge")
+l1 = tk.Label(root, text='to Display',bg='yellow',font=30)
 l1.pack(padx=30,pady=30)
+# c = tk.Canvas(root, width=450, height=450, background="green")
+# c.grid()
+# c.pack()
+# c31 = c31.Carre(c, c31.Vecteur(100, 100), 70, remplissage="black")
+# c31.draw()    
+root.bind('<B1-Motion>', mouvementCarre)
 
-my_w.bind('<B1-Motion>',my_callback) # Mouse left button pressed move
-my_w.mainloop()
+root.mainloop()
