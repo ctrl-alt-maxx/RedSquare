@@ -1,19 +1,10 @@
-
 from functools import partial
-import tkinter as tk
-from tkinter import Label, Menu
 import c31Geometry2 as c31
-
+import tkinter as tk
 
 root = tk.Tk()
-
-# Background color
 root.config(background="royalblue")
-
-# Ajouter un titre a la fenetre TK
-root.title("Jeu du carré rouge")
-
-# Fixe la taille de la fenetre en pixel
+root.title("Jeu du carre rouge")
 root.geometry("1000x1000")
 
 
@@ -41,7 +32,7 @@ rectangle3.draw()
 rectangle4 = c31.Rectangle(canvas, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
 rectangle4.draw()
 
-canvas.pack()
+canvas.grid(column=0, row=0)
 
 def log(var, e):
     print(var)
@@ -70,33 +61,4 @@ def log(var, e):
 loop = c31.LoopEvent(root, partial(log, "Cliquez-loop", None), 1000)
 loop.start()
 
-# POP_UP - RIGHT-CLICK
-
-label = Label(root)
-label.pack()
-
-# Ajout du menu
-popup = Menu(root, tearoff=0)
-
-# Adding items to the menu 
-popup.add_command(label="Facile")
-popup.add_command(label="Moyen")
-popup.add_command(label="Difficile")
-popup.add_separator()
-popup.add_command(label="Quitter", command=root.destroy)
-
-def menu_popup(event):
-    # Affichage du pop-up menu
-    try:
-        popup.tk_popup(event.x_root, event.y_root)
-    finally:
-        # Release the grab
-        popup.grab_release()
-
-# Button 2 for MAC, button 3 for windows 
-root.bind("<ButtonPress-2>", menu_popup)
-
 root.mainloop()
-
-
-
