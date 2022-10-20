@@ -127,7 +127,7 @@ def update():
     rectangle2.draw()
 
     
-loop = c31.LoopEvent(canvas,partial(mvt,rectangle2),50)    
+loop = c31.LoopEvent(canvas,partial(mvt,rectangle2),100)    
      
   
      
