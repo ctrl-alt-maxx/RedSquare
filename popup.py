@@ -22,6 +22,6 @@ def do_popup(event):
     finally:
         m.grab_release()
   
-L.bind("<Button-3>", do_popup)
+L.bind("<ButtonPress-2>", do_popup)
   
 mainloop()

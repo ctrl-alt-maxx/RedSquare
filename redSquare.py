@@ -6,10 +6,7 @@ import c31Geometry2 as c31
 import time 
 from tkinter import messagebox
 
-
 root = tk.Tk()
-
-
 
 # Background color
 root.config(background="royalblue")
@@ -24,14 +21,12 @@ root.geometry("1000x1000")
 # Creating canvas 
 canvas = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black")
 
-
 #canvas = c31.Carre(root, c31.Vecteur(450,450), 450, bordure="black", remplissage="white", epaisseur=50)
 
 # Creating rectangles
 # 1. rectangle bleu gauche
 rectangle1 = c31.Rectangle(canvas, c31.Vecteur(100, 100), 60, 60, remplissage="mediumblue")
 rectangle1.draw()
-
 
 # 2. rectangle bleu superieur droit
 rectangle2 = c31.Rectangle(canvas, c31.Vecteur(300, 85), 60, 50, remplissage="mediumblue")
@@ -64,12 +59,11 @@ def mvt(forme):
     forme.translate(c31.Vecteur(5, 10))
     
 # Mouvement du carree rouge on its own
-#loop2 = c31.LoopEvent(canvas, partial(mvt, carre))
-#loop2.start()
+# loop2 = c31.LoopEvent(canvas, partial(mvt, carre))
+# loop2.start()
 
 def log(var, e):
     print(var)
-
 
 loop = c31.LoopEvent(root, partial(log, "Cliquez-loop", None), 1000)
 loop.start()
@@ -80,30 +74,29 @@ label = Label(root)
 label.pack()
 
 # Ajout du menu
-popup = Menu(root, tearoff=0)
+rightClickMenu = Menu(root, tearoff=0)
 
 # Adding items to the menu 
-popup.add_command(label="Facile")
-popup.add_command(label="Moyen")
-popup.add_command(label="Difficile")
-popup.add_separator()
-popup.add_command(label="Quitter", command=root.destroy)
+rightClickMenu.add_command(label="Facile")
+rightClickMenu.add_command(label="Moyen")
+rightClickMenu.add_command(label="Difficile")
+rightClickMenu.add_separator()
+rightClickMenu.add_command(label="Quitter", command=root.destroy)
 
-def menu_popup(event):
+def menu_rightClick(event):
     # Affichage du pop-up menu
     try:
-        popup.tk_popup(event.x_root, event.y_root)
+        rightClickMenu.tk_popup(event.x_root, event.y_root)
     finally:
         # Release the grab
-        popup.grab_release()
+        rightClickMenu.grab_release()
 
 # Button 2 for MAC, buttonPress-3 for windows 
-root.bind("<ButtonPress-2>", menu_popup)
+root.bind("<ButtonPress-2>", rightClickMenu)
 root.bind(canvas, "<ButtonPress-1>", partial(print, "allo"))
 root.bind("<ButtonPress-1>", partial(print, "pressed"))
 root.bind("<ButtonRelease>", partial(print, "released"))
 root.bind("<B1-Motion>", partial(print, "dragged"))
-
 
 def drag(event) :
     event.widget.place(x=event.x_root, y=event.y_root, anchor=CENTER)
@@ -112,17 +105,16 @@ def drag(event) :
 carre2 = Canvas(root, width=40, height=40, bg="red")
 carre2.place(x=225, y=225, anchor=CENTER)
 
-
-def stopWatch() :
+def timer() :
     startTime = time.time()
     while (drag) :
         clickLength = time.time() - startTime 
         print("Total Time:" + str(clickLength))
 
-carre2.bind("<B1-Motion>", drag, stopWatch)
+carre2.bind("<B1-Motion>", drag, timer)
 
 # prompt window 
-tk.messagebox.showinfo("Time: " + "seconds!")
+tk.messagebox.showinfo("You've survived " + str(timer) + "secondes!")
 
 root.mainloop()
 
