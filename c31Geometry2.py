@@ -1,4 +1,5 @@
 import tkinter as tk
+import redSquare as rS
 import math
 # Permet d'encapsuler une fonction et ses paramètres
 from functools import partial, update_wrapper
@@ -43,7 +44,8 @@ class LoopEvent:
         :type callback: function
         """
         callback()
-        event.start()
+        if rS.go == bool(True):
+            event.start()
 
     @staticmethod
     def prepareCallback(func, *args, **kwargs):
