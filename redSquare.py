@@ -2,11 +2,14 @@
 from functools import partial
 import tkinter as tk
 from tkinter import ANCHOR, CENTER, Canvas, Label, Menu, StringVar
-from turtle import width
 import c31Geometry2 as c31
+import time 
+from tkinter import messagebox
 
 
 root = tk.Tk()
+
+
 
 # Background color
 root.config(background="royalblue")
@@ -104,13 +107,22 @@ root.bind("<B1-Motion>", partial(print, "dragged"))
 
 def drag(event) :
     event.widget.place(x=event.x_root, y=event.y_root, anchor=CENTER)
+    
 
 carre2 = Canvas(root, width=40, height=40, bg="red")
 carre2.place(x=225, y=225, anchor=CENTER)
-carre2.bind("<B1-Motion>", drag)
+
+
+def stopWatch() :
+    startTime = time.time()
+    while (drag) :
+        clickLength = time.time() - startTime 
+        print("Total Time:" + str(clickLength))
+
+carre2.bind("<B1-Motion>", drag, stopWatch)
 
 # prompt window 
-tk.messagebox.askokcancel(title=None, message=None);
+tk.messagebox.showinfo("Time: " + "seconds!")
 
 root.mainloop()
 
