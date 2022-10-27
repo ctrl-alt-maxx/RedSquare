@@ -123,12 +123,15 @@ carre.draw()
   
 def mvt(forme): 
     forme.translateTo(c31.Vecteur(300,200))
-    rectangle2.origine = c31.Vecteur(300,200)
+    #rectangle2.origine = c31.Vecteur(300,200)
+    if():
+        
   
 
 
 def update():
     rectangle2.draw()
+   
     loop.start()  
 
     
