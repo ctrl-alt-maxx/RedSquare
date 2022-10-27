@@ -1,5 +1,5 @@
 import tkinter as tk
-import redSquare as rS
+import truefalse as TS
 import math
 # Permet d'encapsuler une fonction et ses paramètres
 from functools import partial, update_wrapper
@@ -10,7 +10,7 @@ class LoopEvent:
        après un certain temps (par défaut 500 ms).
     """    
 
-    def __init__(self, root, callback = lambda : print("Event"), timesleep = 500) :
+    def __init__(self, root, condition, callback = lambda : print("Event"), timesleep = 500) :
         """Initialise le gestionnaire d'évènement
 
         :param root: Widget parent de notre boucle
@@ -23,6 +23,7 @@ class LoopEvent:
         self.root = root
         self.function = callback
         self.timesleep = timesleep
+        self.condition = condition
 
     def start(self) :
         """Lance l'exécution de la première boucle après un premier interval de la méthode
@@ -44,7 +45,7 @@ class LoopEvent:
         :type callback: function
         """
         callback()
-        if rS.go == bool(True):
+        if event.condition():
             event.start()
 
     @staticmethod
