@@ -101,6 +101,7 @@ root.bind("<ButtonPress-1>", partial(print, "pressed"))
 root.bind("<ButtonRelease>", partial(print, "released"))
 root.bind("<B1-Motion>", partial(print, "dragged"))
 
+
 def drag(event) :
     event.widget.place(x=event.x_root, y=event.y_root, anchor=CENTER)
 
@@ -108,6 +109,8 @@ carre2 = Canvas(root, width=40, height=40, bg="red")
 carre2.place(x=225, y=225, anchor=CENTER)
 carre2.bind("<B1-Motion>", drag)
 
+# prompt window 
+tk.messagebox.askokcancel(title=None, message=None);
 
 root.mainloop()
 
