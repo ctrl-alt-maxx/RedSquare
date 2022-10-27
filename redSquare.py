@@ -121,21 +121,26 @@ carre.draw()
 
 # VVVVVV CAN MODIFY FROM THIS POINT VVVVVV
   
-def mvt(forme): forme.translateTo(c31.Vecteur(300,95))
+def mvt(forme): 
+    forme.translateTo(c31.Vecteur(300,200))
+    rectangle2.origine = c31.Vecteur(300,200)
+  
+
 
 def update():
     rectangle2.draw()
+    loop.start()  
 
     
 loop = c31.LoopEvent(canvas,partial(mvt,rectangle2),100)    
-     
+  
   
      
-if rectangle2.get_position() == c31.Vecteur(300,95) :
-    go = bool(False)
+# if rectangle2.get_position() == c31.Vecteur(300,95) :
+#     go = bool(False)
     
-if go == bool(True) : 
-    loop.start()
+# if go == bool(True) : 
+   
     
 e = c31.LoopEvent(root, update, 100)
 e.startImmediately()  
