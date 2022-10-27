@@ -1,10 +1,11 @@
 
 from functools import partial
+from os import stat
 import tkinter as tk
 from tkinter import ANCHOR, CENTER, Canvas, Label, Menu, StringVar
+from tracemalloc import start, stop
 import c31Geometry2 as c31
 import time 
-from tkinter import messagebox
 
 root = tk.Tk()
 
@@ -105,16 +106,36 @@ def drag(event) :
 carre2 = Canvas(root, width=40, height=40, bg="red")
 carre2.place(x=225, y=225, anchor=CENTER)
 
-def timer() :
-    startTime = time.time()
-    while (drag) :
-        clickLength = time.time() - startTime 
-        print("Total Time:" + str(clickLength))
+#def timer(drag, mouseReleased) :
+#    startTime = time.time()
+    #endTime = time.time()
+##    time_lapsed = round((time.time() - startTime), 2)
+#    while (drag) :
+#        time_lapsed
+#        print("Total Time:" + str(time_lapsed))
+#        if (mouseReleased) :
+#            time_lapsed
 
-carre2.bind("<B1-Motion>", drag, timer)
+def timeStamp() :
+    start_time = time.time()
+    end_time = time.time()
+    timeLapsed = round((time.time() - start_time), 2)
+    if (carre2.bind("<B1-Motion>", drag)) :
+        start_time
+        if (carre2.bind("<ButtonRelease>", mouseReleased)) :
+            end_time
+    print(timeLapsed)
+    
+
+def mouseReleased(event) :
+    event.widget.place(x=event.x_root, y=event.y_root, anchor=CENTER)
+    #event.widget.place(str(event.x) + ", " + str(event.y))
+
+carre2.bind("<B1-Motion>", drag)
+carre2.bind("<ButtonRelease>", mouseReleased)
 
 # prompt window 
-tk.messagebox.showinfo("You've survived " + str(timer) + "secondes!")
+#tk.messagebox.showinfo("You've survived " + str(timer) + "secondes!")
 
 root.mainloop()
 

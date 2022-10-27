@@ -1,4 +1,9 @@
+from os import stat
+from time import time
 from tkinter import *
+from tracemalloc import start
+import time
+
 
 def buttonPressed( event ):
    var.set( "Pressed at [ " + str( event.x ) + ", " + str( event.y ) + " ]" )
@@ -15,7 +20,11 @@ def exitedWindow(  event ):
 def mouseDragged( event ):
    var.set( "Dragged at [ " + str( event.x ) + ", " + str( event.y ) + " ]" )
 
-
+def timer(mouseDragged) :
+   startTime = time.time()
+   while (mouseDragged) :
+      totalTime = round((time.time() - startTime), 2)
+      print(totalTime)
 
 base = Tk()
 base.title("Mouse Events")
@@ -34,6 +43,11 @@ frame.bind( "<ButtonRelease-1>", buttonReleased )
 frame.bind( "<Enter>", enteredWindow )
 frame.bind( "<Leave>", exitedWindow )
 frame.bind( "<B1-Motion>", mouseDragged )
+frame.bind("<B1-Motion>", timer)
 
- 
+if (frame.bind("<ButtonRelease-1>", buttonReleased)) :
+   (frame.bind("<Leave>"), timer)
+
+
+
 base.mainloop()
