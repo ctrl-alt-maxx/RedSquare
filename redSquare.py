@@ -116,23 +116,31 @@ carre2.place(x=225, y=225, anchor=CENTER)
 #        if (mouseReleased) :
 #            time_lapsed
 
-def timeStamp() :
-    start_time = time.time()
-    end_time = time.time()
-    timeLapsed = round((time.time() - start_time), 2)
-    if (carre2.bind("<B1-Motion>", drag)) :
-        start_time
-        if (carre2.bind("<ButtonRelease>", mouseReleased)) :
-            end_time
-    print(timeLapsed)
-    
+def timeStamp(drag) :
 
-def mouseReleased(event) :
-    event.widget.place(x=event.x_root, y=event.y_root, anchor=CENTER)
-    #event.widget.place(str(event.x) + ", " + str(event.y))
+    # Timer starts
+    starttime = time.time()
+    lasttime = starttime
+    lapnum = 1
+   
+    while (drag) :
+        # The current lap-time
+        laptime = round((time.time() - lasttime), 2)
+  
+        # Total time elapsed since the timer started
+        totaltime = round((time.time() - starttime), 2)
+  
+        # Printing the lap number, lap-time, and total time
+        print("Lap No. "+str(lapnum))
+        print("Total Time: "+str(totaltime))
+        print("Lap Time: "+str(laptime))
+    
+        # Updating the previous total time and lap number
+        lasttime = time.time()
+        lapnum += 1
+
 
 carre2.bind("<B1-Motion>", drag)
-carre2.bind("<ButtonRelease>", mouseReleased)
 
 # prompt window 
 #tk.messagebox.showinfo("You've survived " + str(timer) + "secondes!")

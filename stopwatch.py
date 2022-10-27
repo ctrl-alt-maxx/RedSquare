@@ -17,6 +17,7 @@ while value.lower() != "q":
     laptime = round((time.time() - lasttime), 2)
   
     # Total time elapsed since the timer started
+    
     totaltime = round((time.time() - starttime), 2)
   
     # Printing the lap number, lap-time, and total time
