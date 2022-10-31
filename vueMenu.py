@@ -1,4 +1,4 @@
-
+# ** COMPLETER **
 import tkinter as tk
 from tkinter import Menu
 
@@ -13,35 +13,32 @@ root.title("Jeu du carré rouge : Menu")
 # Fixe la taille de la fenêtre en px
 root.geometry("850x850")
 
+# Pour afficher les consignes 
+L = tk.Label(root, text="Choississez un niveau de difficultés dans le menu.", width = 50, height = 20)
+L.pack()
 
-# Texte pour afficher les consignes du jeu 
-#texteTitre = tk.Label(root, text="Jeu du carré rouge", background="white", foreground="black", padx=300, pady=300)
-#texteTitre.grid(column=10, row=11)
+# Création d'un menuBar
+menubar = Menu(root)
+root.config(menu=menubar)
 
-canvas = tk.Canvas(root, width= 450, height= 450, bg="SpringGreen2")
-canvas.create_text(200, 200, text="Faites un clique droit pour afficher les niveaux de difficultés.", fill="black", font=('Helvetica 15 bold'))
+# Creation du file_menu 
+file_menu = Menu(
+    menubar,
+    tearoff=0
+)
 
+# Ajouter des items dans le menu 
+file_menu.add_command(label='Facile')
+file_menu.add_command(label='Moyen')
+file_menu.add_command(label='Difficle')
+file_menu.add_separator()
+file_menu.add_command(label='Quitter', command=root.destroy)
 
-canvas.pack()
-
-rightClickMenu = Menu(root, tearoff=0)
-
-# Adding items to the menu 
-rightClickMenu.add_command(label="Facile")
-rightClickMenu.add_command(label="Moyen")
-rightClickMenu.add_command(label="Difficile")
-rightClickMenu.add_separator()
-rightClickMenu.add_command(label="Quitter", command=root.destroy)
-
-def menu_rightClick(event):
-    # Affichage du pop-up menu
-    try:
-        rightClickMenu.tk_popup(event.x_root, event.y_root)
-    finally:
-        # Release the grab
-        rightClickMenu.grab_release()
-
-root.bind("<ButtonPress-2>", rightClickMenu)
+# Ajouter le file_menu au menuBar
+menubar.add_cascade(
+    label="Menu",
+    menu = file_menu
+)
 
 root.mainloop()
 

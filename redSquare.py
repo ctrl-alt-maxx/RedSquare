@@ -6,6 +6,8 @@ from tkinter import ANCHOR, CENTER, Canvas, Label, Menu, StringVar
 from tracemalloc import start, stop
 import c31Geometry2 as c31
 import time 
+from datetime import date, datetime
+import re
 
 root = tk.Tk()
 
@@ -17,7 +19,6 @@ root.title("Jeu du carré rouge")
 
 # Fixe la taille de la fenetre en pixel
 root.geometry("1000x1000")
-
 
 # Creating canvas 
 canvas = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black")
@@ -139,6 +140,19 @@ def timeStamp(drag) :
         lasttime = time.time()
         lapnum += 1
 
+def calculerTime() :
+    today = datetime.now()
+    startTime_string = today.strftime("%H:%M:%S")
+    print(startTime_string)
+
+    endTime_string = today.strftime("%H:%M:%S")
+    print(endTime_string)
+
+    time = (float(endTime_string) - float(startTime_string) - 0)/1000
+    print(time)
+
+
+#calculerTime()
 
 carre2.bind("<B1-Motion>", drag)
 

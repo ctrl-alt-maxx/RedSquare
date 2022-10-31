@@ -1,9 +1,16 @@
-import threading as th
+from tkinter import *
+#Create an instance of tkinter frame
+win = Tk()
+#Set the geometry of Tkinter frame
+win.geometry("700x250")
 
-def sctn() :
-    print("Section for life")
+# Initialize a Canvas Object
+canvas = Canvas(win, width= 500, height= 300)
 
-S = th.Timer(5.0, sctn)
-S.start()
-print("Program finish")
-S.cancel()
+# Draw an oval inside canvas object
+c= canvas.create_oval(100,10,410,200, outline= "red", fill= "#adf123")
+canvas.pack(expand= True, fill=BOTH)
+
+#Get and Print the coordinates of the Oval
+print("Coordinates of the object are:", canvas.coords(c))
+win.mainloop()
