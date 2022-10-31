@@ -1,7 +1,7 @@
 #import vueMenu as menu
 from cmath import rect
 import tkinter as tk
-from tkinter import BOTH, Canvas
+from tkinter import BOTH, Canvas, StringVar, Variable
 #import os, sys, tkinter.filedialog
 import c31Geometry2 as c31
 
@@ -30,8 +30,8 @@ root.geometry("850x850")
 
 # Création du canvas 
 canvas = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black")
-rectWhite = c31.Rectangle(canvas, c31.Vecteur(450, 450), 850, 850, remplissage="yellow")
-rectWhite.draw()
+rectYellow = c31.Rectangle(canvas, c31.Vecteur(450, 450), 850, 850, remplissage="yellow")
+rectYellow.draw()
 
 # Création des rectangles
 # 1. Rectangle bleu gauche
@@ -61,12 +61,29 @@ def glisser(event) :
     event.widget.place(x=event.x_root, y=event.y_root, anchor=tk.CENTER)
 
 
-#carreRouge.bind("<B1-Motion>", glisser)
+carreRouge.bind("<B1-Motion>", glisser)
 
 print("Rectangle1", c31.Rectangle.get_coordonnees(rectangle1))
-print("rectwhite", c31.Rectangle.get_coordonnees(rectWhite))
+print("rectJaune", c31.Rectangle.get_coordonnees(rectYellow))
 
-if (carreRouge.coords)
+#carre = c31.Carre(canvas, c31.Vecteur(270, 249), 40, remplissage="green")
+#carre.draw()
 
+#carre.bind("<B1-Motion>", glisser)
+
+#print("Carre", c31.Carre.get_coordonnees(carre))
+#print("CarreRougeCanvas", canvas.coords(carreRouge))
+
+def move() :
+    while (carreRouge.bind("<B1-Motion>", glisser)) :
+        if (carreRouge.place(x=879)) :
+            print("out")
+
+var = StringVar()
+def outsideYellowRect(event) :
+    var.set("is outside")
+
+
+    
 
 root.mainloop()
