@@ -1,5 +1,7 @@
 #import vueMenu as menu
 from cmath import rect
+from functools import partial
+from math import dist
 import tkinter as tk
 from tkinter import BOTH, Canvas, StringVar, Variable
 #import os, sys, tkinter.filedialog
@@ -74,16 +76,28 @@ print("rectJaune", c31.Rectangle.get_coordonnees(rectYellow))
 #print("Carre", c31.Carre.get_coordonnees(carre))
 #print("CarreRougeCanvas", canvas.coords(carreRouge))
 
-def move() :
-    while (carreRouge.bind("<B1-Motion>", glisser)) :
-        if (carreRouge.place(x=879)) :
-            print("out")
+#def move() :
+#    while (carreRouge.bind("<B1-Motion>", glisser)) :
+#        if (carreRouge.place(x=879)) :
+#            print("out")
 
-var = StringVar()
-def outsideYellowRect(event) :
-    var.set("is outside")
+#var = StringVar()
+#def outsideYellowRect(event) :
+#    var.set("is outside")
+
+def mvt(forme) :
+    forme.translate(c31.Vecteur(10,0)) 
+    forme.draw()
+
+def mvtBack(forme) :
+    forme.translate(c31.Vecteur(8,0))
+    forme.translate(c31.Vecteur(0,9))
+    forme.draw()
 
 
-    
+loop = c31.LoopEvent(canvas, partial(mvt, rectangle1))
+loop.start()
+
+
 
 root.mainloop()
