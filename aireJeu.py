@@ -95,9 +95,13 @@ def mvtBack(forme) :
     forme.draw()
 
 
-loop = c31.LoopEvent(canvas, partial(mvt, rectangle1))
-loop.start()
+#loop = c31.LoopEvent(canvas, partial(mvt, rectangle1))
+#loop.start()
 
+def mouseDragged() :
+    root.bind("<B1-Motion>", partial(print, "dragged"))
+    carreRouge.bind("<B1-Motion>", glisser)
 
+mouseDragged()
 
 root.mainloop()

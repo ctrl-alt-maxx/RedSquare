@@ -83,6 +83,8 @@ def mvt(forme):
 loop2 = c31.LoopEvent(canvas, partial(mvt, carre))
 loop2.start()
 
+print(c31.Polygone.get_coordonnees(carre))
+
 
 
 
