@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import BOTH, Canvas, StringVar, Variable
 #import os, sys, tkinter.filedialog
 import c31Geometry2 as c31
+from tkinter import Menu
 
 root = tk.Tk()
 
@@ -17,6 +18,30 @@ root.title("Jeu du carré rouge")
 
 # Fixe la taille de la fenêtre en px
 root.geometry("850x850")
+
+
+# Création d'un menuBar
+menubar = Menu(root)
+root.config(menu=menubar)
+
+# Creation du file_menu 
+file_menu = Menu(
+    menubar,
+    tearoff=0
+)
+
+# Ajouter des items dans le menu 
+file_menu.add_command(label='Facile')
+file_menu.add_command(label='Moyen')
+file_menu.add_command(label='Difficle')
+file_menu.add_separator()
+file_menu.add_command(label='Quitter', command=root.destroy)
+
+# Ajouter le file_menu au menuBar
+menubar.add_cascade(
+    label="Menu",
+    menu = file_menu
+)
 
 # Avoir un fichier excutable 
 #pyExec = sys.executable
@@ -95,8 +120,9 @@ def mvtBack(forme) :
     forme.draw()
 
 
-#loop = c31.LoopEvent(canvas, partial(mvt, rectangle1))
-#loop.start()
+
+loop = c31.LoopEvent(canvas, partial(mvt, rectangle1))
+loop.start()
 
 def mouseDragged() :
     root.bind("<B1-Motion>", partial(print, "dragged"))
