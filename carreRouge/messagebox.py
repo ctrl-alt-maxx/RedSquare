@@ -1,5 +1,5 @@
-from tkinter import messagebox
+from tkinter import messagebox as msg
 
 num = 2 + 2
 
-messagebox.showinfo("Calcul", "2 + 2 = " + str(num) )
+msg.showinfo("Calcul", "2 + 2 = " + str(num) )
