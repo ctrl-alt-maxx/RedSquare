@@ -10,7 +10,7 @@ class LoopEvent:
        après un certain temps (par défaut 500 ms).
     """    
 
-    def __init__(self, root, condition, callback = lambda : print("Event"), timesleep = 500) :
+    def __init__(self, root,condition, callback = lambda : print("Event"), timesleep = 500) :
         """Initialise le gestionnaire d'évènement
 
         :param root: Widget parent de notre boucle
@@ -24,7 +24,8 @@ class LoopEvent:
         self.function = callback
         self.timesleep = timesleep
         self.condition = condition
-
+        
+        
     def start(self) :
         """Lance l'exécution de la première boucle après un premier interval de la méthode
         """
@@ -34,19 +35,25 @@ class LoopEvent:
         """Lance immédiatement une première exécution de la méthode
         """
         LoopEvent.__loop(self, self.function)
-
+        
+    # def condition(self):
+    #     if self == bool(True):
+    #         return bool(True)
+        
     @staticmethod
     def __loop(event, callback) :
         """Permet de lancer la méthode et génère une nouvelle boucle
-
+        
         :param event: Objet représentant la boucle de l'évènement
         :type event: LoppEvent
         :param callback: Expression lambda ou fonction devant être exécuté à chaque boucle.
         :type callback: function
         """
+        
+      
         callback()
-        if event.condition():
-            event.start()
+        #if event.condition():
+        event.start()
 
     @staticmethod
     def prepareCallback(func, *args, **kwargs):
