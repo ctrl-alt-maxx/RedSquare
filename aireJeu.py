@@ -2,11 +2,18 @@
 from cmath import rect
 from functools import partial
 from math import dist
+from re import X
+import re
+from sqlite3 import Cursor
 import tkinter as tk
 from tkinter import BOTH, Canvas, StringVar, Variable
+from turtle import xcor
 #import os, sys, tkinter.filedialog
 import c31Geometry2 as c31
 from tkinter import Menu
+import pygame
+from pygame import *
+
 
 root = tk.Tk()
 
@@ -60,22 +67,24 @@ canvas = tk.Canvas(root, background="white", width=450, height=450, highlightthi
 rectYellow = c31.Rectangle(canvas, c31.Vecteur(450, 450), 850, 850, remplissage="yellow")
 rectYellow.draw()
 
-# Création des rectangles
-# 1. Rectangle bleu gauche
-rectangle1 = c31.Rectangle(canvas, c31.Vecteur(100, 100), 60, 60, remplissage="mediumblue")
-rectangle1.draw()
+class Rectangle:
+    # Création des rectangles
+    # 1. Rectangle bleu gauche
+    rectangle1 = c31.Rectangle(canvas, c31.Vecteur(100, 100), 60, 60, remplissage="mediumblue")
+    rectangle1.draw()
 
-# 2. Rectangle bleu superieur droit
-rectangle2 = c31.Rectangle(canvas, c31.Vecteur(300, 85), 60, 50, remplissage="mediumblue")
-rectangle2.draw()
+    # 2. Rectangle bleu superieur droit
+    rectangle2 = c31.Rectangle(canvas, c31.Vecteur(300, 85), 60, 50, remplissage="mediumblue")
+    rectangle2.draw()
 
-# 3. Rectangle bleu inferieur gauche 
-rectangle3 = c31.Rectangle(canvas, c31.Vecteur(85, 350), 30, 60, remplissage="mediumblue")
-rectangle3.draw()
+    # 3. Rectangle bleu inferieur gauche 
+    rectangle3 = c31.Rectangle(canvas, c31.Vecteur(85, 350), 30, 60, remplissage="mediumblue")
+    rectangle3.draw()
 
-# 4. Rectangle bleu infereieur droit 
-rectangle4 = c31.Rectangle(canvas, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
-rectangle4.draw()
+    # 4. Rectangle bleu infereieur droit 
+    rectangle4 = c31.Rectangle(canvas, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
+    rectangle4.draw()
+
 
 canvas.pack()
 
@@ -90,11 +99,11 @@ def glisser(event) :
 
 carreRouge.bind("<B1-Motion>", glisser)
 
-print("Rectangle1", c31.Rectangle.get_coordonnees(rectangle1))
+print("Rectangle1", c31.Rectangle.get_coordonnees(Rectangle.rectangle1))
 print("rectJaune", c31.Rectangle.get_coordonnees(rectYellow))
 
-#carre = c31.Carre(canvas, c31.Vecteur(270, 249), 40, remplissage="green")
-#carre.draw()
+carre = c31.Carre(canvas, c31.Vecteur(270, 249), 40, remplissage="green")
+carre.draw()
 
 #carre.bind("<B1-Motion>", glisser)
 
@@ -119,15 +128,51 @@ def mvtBack(forme) :
     forme.translate(c31.Vecteur(0,9))
     forme.draw()
 
+#loop = c31.LoopEvent(canvas, partial(mvt, rectangle1))
+#loop.start()
 
+go = bool(True)
 
-loop = c31.LoopEvent(canvas, partial(mvt, rectangle1))
-loop.start()
+# DETERMINE LA VITTESE DES FORMES BLEUES AU DÉBUT DU JEU
+class Difficulté:
+    defaultSpeed = 0 # THE LOWER THE VALUE, THE CLEANNER THE MOVEMENT WITH FASTER SPEED
+    def Facile(self):
+        self.defaultSpeed = 1000
+        self.color = "red"
+        loop = c31.LoopEvent(canvas,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
+        loop.start()
 
-def mouseDragged() :
-    root.bind("<B1-Motion>", partial(print, "dragged"))
-    carreRouge.bind("<B1-Motion>", glisser)
+    def Moyen(self):
+        self.defaultSpeed = 200
+        loop = c31.LoopEvent(canvas,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
+        loop.start()
+        
+    def Difficile(self):
+        self.defaultSpeed = 50
+        loop = c31.LoopEvent(canvas,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
+        loop.start()
+      
+d = Difficulté()
 
-mouseDragged()
+def update():
+    Rectangle.rectangle2.draw()
+
+#if rectangle2.get_position() == c31.Vecteur(300,95) :
+#    go = bool(False)
+    
+#if go == bool(True) : 
+#    loop.start()
+
+e = c31.LoopEvent(root, update, d.defaultSpeed)
+e.startImmediately()
+
+# CACHE LE CURSEUR SUR LE CARREÉ ROUGE
+carreRouge.config(cursor="none")
+
+def motion(event):
+    x, y = event.x, event.y
+    print('{}, {}'.format(x, y))
+
+carreRouge.bind('<B1-Motion>', glisser)
 
 root.mainloop()
