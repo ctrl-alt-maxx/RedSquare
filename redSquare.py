@@ -7,7 +7,7 @@ from tracemalloc import start, stop
 import c31Geometry2 as c31
 import time 
 from datetime import date, datetime
-import re
+
 
 root = tk.Tk()
 
@@ -21,28 +21,28 @@ root.title("Jeu du carré rouge")
 root.geometry("1000x1000")
 
 # Creating canvas 
-canvas = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black")
+canvasBase = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black")
 
 #canvas = c31.Carre(root, c31.Vecteur(450,450), 450, bordure="black", remplissage="white", epaisseur=50)
 
 # Creating rectangles
 # 1. rectangle bleu gauche
-rectangle1 = c31.Rectangle(canvas, c31.Vecteur(100, 100), 60, 60, remplissage="mediumblue")
+rectangle1 = c31.Rectangle(canvasBase, c31.Vecteur(100, 100), 60, 60, remplissage="mediumblue")
 rectangle1.draw()
 
 # 2. rectangle bleu superieur droit
-rectangle2 = c31.Rectangle(canvas, c31.Vecteur(300, 85), 60, 50, remplissage="mediumblue")
+rectangle2 = c31.Rectangle(canvasBase, c31.Vecteur(300, 85), 60, 50, remplissage="mediumblue")
 rectangle2.draw()
 
 # 3. rectangle bleu inferieur gauche 
-rectangle3 = c31.Rectangle(canvas, c31.Vecteur(85, 350), 30, 60, remplissage="mediumblue")
+rectangle3 = c31.Rectangle(canvasBase, c31.Vecteur(85, 350), 30, 60, remplissage="mediumblue")
 rectangle3.draw()
 
 # 4. rectangle bleu infereieur droit 
-rectangle4 = c31.Rectangle(canvas, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
+rectangle4 = c31.Rectangle(canvasBase, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
 rectangle4.draw()
 
-canvas.pack()
+canvasBase.pack()
 
 def log(var, e):
     print(var)
@@ -95,7 +95,7 @@ def menu_rightClick(event):
 
 # Button 2 for MAC, buttonPress-3 for windows 
 root.bind("<ButtonPress-2>", rightClickMenu)
-root.bind(canvas, "<ButtonPress-1>", partial(print, "allo"))
+root.bind(canvasBase, "<ButtonPress-1>", partial(print, "allo"))
 root.bind("<ButtonPress-1>", partial(print, "pressed"))
 root.bind("<ButtonRelease>", partial(print, "released"))
 root.bind("<B1-Motion>", partial(print, "dragged"))
@@ -140,16 +140,16 @@ def timeStamp(drag) :
         lasttime = time.time()
         lapnum += 1
 
-def calculerTime() :
-    today = datetime.now()
-    startTime_string = today.strftime("%H:%M:%S")
-    print(startTime_string)
+    def calculerTime() :
+        today = datetime.now()
+        startTime_string = today.strftime("%H:%M:%S")
+        print(startTime_string)
 
-    endTime_string = today.strftime("%H:%M:%S")
-    print(endTime_string)
+        endTime_string = today.strftime("%H:%M:%S")
+        print(endTime_string)
 
-    time = (float(endTime_string) - float(startTime_string) - 0)/1000
-    print(time)
+        time = (float(endTime_string) - float(startTime_string) - 0)/1000
+        print(time)
 
 
 #calculerTime()
@@ -158,6 +158,8 @@ carre2.bind("<B1-Motion>", drag)
 
 # prompt window 
 #tk.messagebox.showinfo("You've survived " + str(timer) + "secondes!")
+
+
 
 root.mainloop()
 

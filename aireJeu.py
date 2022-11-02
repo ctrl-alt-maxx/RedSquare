@@ -1,19 +1,11 @@
 #import vueMenu as menu
 from cmath import rect
 from functools import partial
-from math import dist
-from re import X
-import re
-from sqlite3 import Cursor
 import tkinter as tk
 from tkinter import BOTH, Canvas, StringVar, Variable
-from turtle import xcor
 #import os, sys, tkinter.filedialog
 import c31Geometry2 as c31
 from tkinter import Menu
-import pygame
-from pygame import *
-
 
 root = tk.Tk()
 
@@ -63,30 +55,34 @@ menubar.add_cascade(
 #open()
 
 # Création du canvas 
-canvas = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black")
-rectYellow = c31.Rectangle(canvas, c31.Vecteur(450, 450), 850, 850, remplissage="yellow")
+canvasBase = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black")
+rectYellow = c31.Rectangle(canvasBase, c31.Vecteur(450, 450), 850, 850, remplissage="yellow")
 rectYellow.draw()
 
 class Rectangle:
     # Création des rectangles
     # 1. Rectangle bleu gauche
-    rectangle1 = c31.Rectangle(canvas, c31.Vecteur(100, 100), 60, 60, remplissage="mediumblue")
+    rectangle1 = c31.Rectangle(canvasBase, c31.Vecteur(100, 100), 60, 60, remplissage="mediumblue")
     rectangle1.draw()
 
     # 2. Rectangle bleu superieur droit
-    rectangle2 = c31.Rectangle(canvas, c31.Vecteur(300, 85), 60, 50, remplissage="mediumblue")
+    rectangle2 = c31.Rectangle(canvasBase, c31.Vecteur(300, 85), 60, 50, remplissage="mediumblue")
     rectangle2.draw()
 
     # 3. Rectangle bleu inferieur gauche 
-    rectangle3 = c31.Rectangle(canvas, c31.Vecteur(85, 350), 30, 60, remplissage="mediumblue")
+    rectangle3 = c31.Rectangle(canvasBase, c31.Vecteur(85, 350), 30, 60, remplissage="mediumblue")
     rectangle3.draw()
 
     # 4. Rectangle bleu infereieur droit 
-    rectangle4 = c31.Rectangle(canvas, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
+    rectangle4 = c31.Rectangle(canvasBase, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
     rectangle4.draw()
 
 
-canvas.pack()
+    
+
+
+
+canvasBase.pack()
 
 # Création du carré rouge 
 carreRouge = Canvas(root, width=40, height=40, background="red")
@@ -99,10 +95,9 @@ def glisser(event) :
 
 carreRouge.bind("<B1-Motion>", glisser)
 
-print("Rectangle1", c31.Rectangle.get_coordonnees(Rectangle.rectangle1))
-print("rectJaune", c31.Rectangle.get_coordonnees(rectYellow))
 
-carre = c31.Carre(canvas, c31.Vecteur(270, 249), 40, remplissage="green")
+
+carre = c31.Carre(canvasBase, c31.Vecteur(270, 249), 40, remplissage="green")
 carre.draw()
 
 #carre.bind("<B1-Motion>", glisser)
@@ -119,17 +114,40 @@ carre.draw()
 #def outsideYellowRect(event) :
 #    var.set("is outside")
 
-def mvt(forme) :
+def mvt1(forme) :
+    forme.translate(c31.Vecteur(10,0)) 
+    forme.translate(c31.Vecteur(0,10)) 
+    forme.draw()
+
+def mvt2(forme) :
+    forme.translate(c31.Vecteur(0,10)) 
+    forme.translate(c31.Vecteur(0,10)) 
+    forme.draw()
+
+def mvt3(forme) :
+    forme.translate(c31.Vecteur(10,0)) 
     forme.translate(c31.Vecteur(10,0)) 
     forme.draw()
 
-def mvtBack(forme) :
-    forme.translate(c31.Vecteur(8,0))
-    forme.translate(c31.Vecteur(0,9))
+def mvt4(forme):
+    forme.translate(c31.Vecteur(0,-8)) 
+    forme.translate(c31.Vecteur(-8,0)) 
     forme.draw()
 
-#loop = c31.LoopEvent(canvas, partial(mvt, rectangle1))
-#loop.start()
+def mvtBack(forme) :
+    forme.translate(c31.Vecteur(0,8))
+    forme.translate(c31.Vecteur(8,0))
+    forme.draw()
+
+loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1))
+loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2))
+loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3))
+loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4))
+
+loop1.start()
+loop2.start()
+loop3.start()
+loop4.start()
 
 go = bool(True)
 
@@ -139,17 +157,17 @@ class Difficulté:
     def Facile(self):
         self.defaultSpeed = 1000
         self.color = "red"
-        loop = c31.LoopEvent(canvas,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
+        loop = c31.LoopEvent(canvasBase,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
         loop.start()
 
     def Moyen(self):
         self.defaultSpeed = 200
-        loop = c31.LoopEvent(canvas,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
+        loop = c31.LoopEvent(canvasBase,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
         loop.start()
         
     def Difficile(self):
         self.defaultSpeed = 50
-        loop = c31.LoopEvent(canvas,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
+        loop = c31.LoopEvent(canvasBase,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
         loop.start()
       
 d = Difficulté()
@@ -174,5 +192,35 @@ def motion(event):
     print('{}, {}'.format(x, y))
 
 carreRouge.bind('<B1-Motion>', glisser)
+
+print("Rectangle1", c31.Rectangle.get_coordonnees(Rectangle.rectangle1))
+print("Rectangle2", c31.Rectangle.get_coordonnees(Rectangle.rectangle2))
+print("Rectangle3", c31.Rectangle.get_coordonnees(Rectangle.rectangle3))
+print("Rectangle4", c31.Rectangle.get_coordonnees(Rectangle.rectangle4))
+print("rectJaune", c31.Rectangle.get_coordonnees(rectYellow))
+
+
+def toucheEnemie():
+    if (carreRouge.get_event.x) :
+        print
+
+x = canvasBase.winfo_pointerx()
+y = canvasBase.winfo_pointery()
+abs_coord_x = canvasBase.winfo_pointerx() - canvasBase.winfo_rootx()
+abs_coord_y = canvasBase.winfo_pointery() - canvasBase.winfo_rooty()
+print("x", x)
+print("y", y)
+print("abs_coord_x", abs_coord_x)
+print("abs_coord_y", abs_coord_y)
+
+def get_absolute_position(event):
+    x = event.x
+    y = event.y
+    return x, y
+
+fakerect = canvasBase.create_rectangle(100, 100, 60, 60, outline="magenta", fill="magenta")
+print("fake", canvasBase.coords(fakerect))
+
+
 
 root.mainloop()
