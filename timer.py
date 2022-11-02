@@ -1,16 +1,12 @@
-from tkinter import *
-#Create an instance of tkinter frame
-win = Tk()
-#Set the geometry of Tkinter frame
-win.geometry("700x250")
+from tkinter import Tk
+from tkinter.messagebox import Message 
+from _tkinter import TclError
 
-# Initialize a Canvas Object
-canvas = Canvas(win, width= 500, height= 300)
-
-# Draw an oval inside canvas object
-c= canvas.create_oval(100,10,410,200, outline= "red", fill= "#adf123")
-canvas.pack(expand= True, fill=BOTH)
-
-#Get and Print the coordinates of the Oval
-print("Coordinates of the object are:", canvas.coords(c))
-win.mainloop()
+TIME_TO_WAIT = 10000 # in milliseconds 
+root = Tk() 
+root.withdraw()
+try:
+    root.after(TIME_TO_WAIT, root.destroy) 
+    Message(title="your title", message="your message", master=root).show()
+except TclError:
+    pass

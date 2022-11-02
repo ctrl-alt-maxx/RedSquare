@@ -1,11 +1,15 @@
 #import vueMenu as menu
 from cmath import rect
+from email import message
 from functools import partial
 import tkinter as tk
-from tkinter import BOTH, Canvas, StringVar, Variable
+from tkinter import BOTH, Canvas, Message, StringVar, TclError, Variable
+from tkinter import dialog
+from turtle import distance
 #import os, sys, tkinter.filedialog
 import c31Geometry2 as c31
 from tkinter import Menu
+from tkinter import messagebox as msg
 
 root = tk.Tk()
 
@@ -17,6 +21,51 @@ root.title("Jeu du carré rouge")
 
 # Fixe la taille de la fenêtre en px
 root.geometry("850x850")
+
+# DETERMINE LA VITTESE DES FORMES BLEUES AU DÉBUT DU JEU
+class Difficulté:
+    defaultSpeed = 0 # THE LOWER THE VALUE, THE CLEANNER THE MOVEMENT WITH FASTER SPEED
+    def Facile(self):
+        self.defaultSpeed = 1000
+       
+        loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1), self.defaultSpeed)
+        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2), self.defaultSpeed)
+        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3), self.defaultSpeed)
+        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4), self.defaultSpeed)
+
+        loop1.start()
+        loop1.start()
+        loop2.start()
+        loop3.start()
+        loop4.start()
+
+    def Moyen(self):
+        self.defaultSpeed = 200
+
+        loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1), self.defaultSpeed)
+        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2), self.defaultSpeed)
+        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3), self.defaultSpeed)
+        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4), self.defaultSpeed)
+
+        loop1.start()
+        loop2.start()
+        loop3.start()
+        loop4.start()
+        
+    def Difficile(self):
+        self.defaultSpeed = 50
+
+        loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1), self.defaultSpeed)
+        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2), self.defaultSpeed)
+        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3), self.defaultSpeed)
+        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4), self.defaultSpeed)
+
+        loop1.start()
+        loop2.start()
+        loop3.start()
+        loop4.start()
+      
+d = Difficulté()
 
 
 # Création d'un menuBar
@@ -30,9 +79,9 @@ file_menu = Menu(
 )
 
 # Ajouter des items dans le menu 
-file_menu.add_command(label='Facile')
-file_menu.add_command(label='Moyen')
-file_menu.add_command(label='Difficle')
+file_menu.add_command(label='Facile', command=d.Facile)
+file_menu.add_command(label='Moyen', command=d.Moyen)
+file_menu.add_command(label='Difficle', command=d.Difficile)
 file_menu.add_separator()
 file_menu.add_command(label='Quitter', command=root.destroy)
 
@@ -41,6 +90,8 @@ menubar.add_cascade(
     label="Menu",
     menu = file_menu
 )
+
+
 
 # Avoir un fichier excutable 
 #pyExec = sys.executable
@@ -56,8 +107,8 @@ menubar.add_cascade(
 
 # Création du canvas 
 canvasBase = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black")
-rectYellow = c31.Rectangle(canvasBase, c31.Vecteur(450, 450), 850, 850, remplissage="yellow")
-rectYellow.draw()
+#rectYellow = c31.Rectangle(canvasBase, c31.Vecteur(450, 450), 850, 850, remplissage="yellow")
+#rectYellow.draw()
 
 class Rectangle:
     # Création des rectangles
@@ -78,10 +129,6 @@ class Rectangle:
     rectangle4.draw()
 
 
-    
-
-
-
 canvasBase.pack()
 
 # Création du carré rouge 
@@ -92,27 +139,10 @@ carreRouge.place(x=420, y=250, anchor=tk.CENTER)
 def glisser(event) :
     event.widget.place(x=event.x_root, y=event.y_root, anchor=tk.CENTER)
 
-
 carreRouge.bind("<B1-Motion>", glisser)
-
-
 
 carre = c31.Carre(canvasBase, c31.Vecteur(270, 249), 40, remplissage="green")
 carre.draw()
-
-#carre.bind("<B1-Motion>", glisser)
-
-#print("Carre", c31.Carre.get_coordonnees(carre))
-#print("CarreRougeCanvas", canvas.coords(carreRouge))
-
-#def move() :
-#    while (carreRouge.bind("<B1-Motion>", glisser)) :
-#        if (carreRouge.place(x=879)) :
-#            print("out")
-
-#var = StringVar()
-#def outsideYellowRect(event) :
-#    var.set("is outside")
 
 def mvt1(forme) :
     forme.translate(c31.Vecteur(10,0)) 
@@ -139,6 +169,7 @@ def mvtBack(forme) :
     forme.translate(c31.Vecteur(8,0))
     forme.draw()
 
+
 loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1))
 loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2))
 loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3))
@@ -149,31 +180,12 @@ loop2.start()
 loop3.start()
 loop4.start()
 
+
 go = bool(True)
 
-# DETERMINE LA VITTESE DES FORMES BLEUES AU DÉBUT DU JEU
-class Difficulté:
-    defaultSpeed = 0 # THE LOWER THE VALUE, THE CLEANNER THE MOVEMENT WITH FASTER SPEED
-    def Facile(self):
-        self.defaultSpeed = 1000
-        self.color = "red"
-        loop = c31.LoopEvent(canvasBase,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
-        loop.start()
 
-    def Moyen(self):
-        self.defaultSpeed = 200
-        loop = c31.LoopEvent(canvasBase,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
-        loop.start()
-        
-    def Difficile(self):
-        self.defaultSpeed = 50
-        loop = c31.LoopEvent(canvasBase,partial(mvt,Rectangle.rectangle2), self.defaultSpeed)
-        loop.start()
-      
-d = Difficulté()
-
-def update():
-    Rectangle.rectangle2.draw()
+##def update():
+ #   Rectangle.rectangle2.draw()
 
 #if rectangle2.get_position() == c31.Vecteur(300,95) :
 #    go = bool(False)
@@ -181,8 +193,8 @@ def update():
 #if go == bool(True) : 
 #    loop.start()
 
-e = c31.LoopEvent(root, update, d.defaultSpeed)
-e.startImmediately()
+#e = c31.LoopEvent(root, update, d.defaultSpeed)
+#e.startImmediately()
 
 # CACHE LE CURSEUR SUR LE CARREÉ ROUGE
 carreRouge.config(cursor="none")
@@ -197,7 +209,7 @@ print("Rectangle1", c31.Rectangle.get_coordonnees(Rectangle.rectangle1))
 print("Rectangle2", c31.Rectangle.get_coordonnees(Rectangle.rectangle2))
 print("Rectangle3", c31.Rectangle.get_coordonnees(Rectangle.rectangle3))
 print("Rectangle4", c31.Rectangle.get_coordonnees(Rectangle.rectangle4))
-print("rectJaune", c31.Rectangle.get_coordonnees(rectYellow))
+#print("rectJaune", c31.Rectangle.get_coordonnees(rectYellow))
 
 
 def toucheEnemie():
@@ -218,9 +230,13 @@ def get_absolute_position(event):
     y = event.y
     return x, y
 
-fakerect = canvasBase.create_rectangle(100, 100, 60, 60, outline="magenta", fill="magenta")
-print("fake", canvasBase.coords(fakerect))
+def endGame():
+    msg.showerror(title="error", message="end of game", master=root).show()
 
+def counter():
+    whenToStop = 5000
+    #root.after(whenToStop, root.destroy)
+    endGame()
 
-
+counter()
 root.mainloop()
