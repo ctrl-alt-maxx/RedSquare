@@ -1,12 +1,7 @@
+import c31Geometry2 as c31
 
-
-global step    
-step = 1  
-
-
-# go = bool(True)
-
-
-# Step1 = bool(True)
-# Step2 = 0
-# Step3 = 0
+class Check:
+    
+    def check(forme):
+        if forme.get_position() == c31.Vecteur(300,120):
+            return True

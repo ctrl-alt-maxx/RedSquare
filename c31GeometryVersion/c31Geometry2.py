@@ -1,5 +1,4 @@
 import tkinter as tk
-import truefalse as TS
 import math
 # Permet d'encapsuler une fonction et ses paramètres
 from functools import partial, update_wrapper
@@ -22,24 +21,28 @@ class LoopEvent:
         self.root = root
         self.function = callback
         self.timesleep = timesleep
+        self.run = True
         #self.shape = shape
         #self.vect = vect
         #self.condition = condition
     
+    def stop(self) :
+        """Arrête la boucle
+        """
+        self.run = False
    
     def start(self) :
         """Lance l'exécution de la première boucle après un premier interval de la méthode
         """
-        self.root.after(self.timesleep, LoopEvent.prepareCallback(LoopEvent.__loop, self, self.function))
+        if self.run :
+            self.root.after(self.timesleep, LoopEvent.prepareCallback(LoopEvent.__loop, self, self.function))
 
     def startImmediately(self) :
         """Lance immédiatement une première exécution de la méthode
         """
         LoopEvent.__loop(self, self.function)
         
-    # def condition(self):
-    #     if self == bool(True):
-    #         return bool(True)
+   
         
     @staticmethod
     def __loop(event, callback) :
@@ -526,6 +529,9 @@ class Polygone:
         Raises:
             TypeError: Le paramètre doit être de type Vecteur
         """
+        
+        self.origine = self.origine + direction
+        
         if not isinstance(direction, Vecteur) :
             raise TypeError("Le paramètre doit être de type Vecteur")
         

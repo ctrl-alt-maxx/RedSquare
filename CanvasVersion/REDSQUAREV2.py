@@ -44,7 +44,7 @@ class GFG:
 if __name__ == "__main__":
  
     # object of class Tk, responsible for creating
-    # a tkinter toplevel window
+    # a tkinter toplevel windows
     master = Tk()
     
     master.config(background="royalblue")
