@@ -28,7 +28,7 @@ class Difficulté:
     def Facile(self):
         self.defaultSpeed = 1000
        
-        loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1), self.defaultSpeed)
+        loop1 = c31.LoopEvent(canvasBase, partial(Movement.mvt1, Rectangle.rectangle1), self.defaultSpeed)
         loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2), self.defaultSpeed)
         loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3), self.defaultSpeed)
         loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4), self.defaultSpeed)
@@ -42,6 +42,7 @@ class Difficulté:
     def Moyen(self):
         self.defaultSpeed = 200
 
+        
         loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1), self.defaultSpeed)
         loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2), self.defaultSpeed)
         loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3), self.defaultSpeed)
@@ -158,43 +159,48 @@ carreRouge.bind("<B1-Motion>", glisser)
 
 
 
+class Movement:
 
-def mvt1(forme) :
-    forme.translate(c31.Vecteur(2,0)) 
-    forme.translate(c31.Vecteur(0,2)) 
-    forme.draw()
+    def mvt1(forme) :
+        forme.translate(c31.Vecteur(2,0)) 
+        forme.translate(c31.Vecteur(0,2)) 
+        forme.draw()
 
-def mvt2(forme) :
-    forme.translate(c31.Vecteur(0,2)) 
-    forme.translate(c31.Vecteur(0,2)) 
-    forme.draw()
+    def mvt2(forme) :
+        forme.translate(c31.Vecteur(0,2)) 
+        forme.translate(c31.Vecteur(0,2)) 
+        forme.draw()
 
-def mvt3(forme) :
-    forme.translate(c31.Vecteur(10,0)) 
-    forme.translate(c31.Vecteur(10,0)) 
-    forme.draw()
+    def mvt3(forme) :
+        forme.translate(c31.Vecteur(10,0)) 
+        forme.translate(c31.Vecteur(10,0)) 
+        forme.draw()
 
-def mvt4(forme):
-    forme.translate(c31.Vecteur(0,-8)) 
-    forme.translate(c31.Vecteur(-8,0)) 
-    forme.draw()
+    def mvt4(forme):
+        forme.translate(c31.Vecteur(0,-8)) 
+        forme.translate(c31.Vecteur(-8,0)) 
+        forme.draw()
 
-def mvtBack(forme) :
-    forme.translate(c31.Vecteur(0,8))
-    forme.translate(c31.Vecteur(8,0))
-    forme.draw()
+    def mvtBack(forme) :
+        forme.translate(c31.Vecteur(0,8))
+        forme.translate(c31.Vecteur(8,0))
+        forme.draw()
 
+    def loop1() :
+        loop1 = c31.LoopEvent(canvasBase, partial(Movement.mvt1, Rectangle.rectangle1))
+        loop1.start()
 
-loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1))
-loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2))
-loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3))
-loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4))
+    def loop2():
+        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2))
+        loop2.start()
 
-loop1.start()
-loop2.start()
-loop3.start()
-loop4.start()
+    def loop3():
+        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3))
+        loop3.start()
 
+    def loop4():
+        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4))
+        loop4.start()
 
 go = bool(True)
 
