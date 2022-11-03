@@ -1,6 +1,6 @@
-from tkinter.ttk import Frame
 from controlleurs import MenuController, JeuController
 import tkinter as tk
+
 
 # BOUCLE DU JEU
 if __name__ == "__main__" :
@@ -28,4 +28,5 @@ if __name__ == "__main__" :
 
     menu.start()
 
-    root.mainloop()
+
+root.mainloop()

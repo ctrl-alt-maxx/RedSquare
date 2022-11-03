@@ -25,11 +25,16 @@ class Rectangle :
         en4 = c31.Rectangle(VueJeu.canvasBase, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
         en4.draw()
 
+
 class CarreRouge() :
 
     # CRÉATION DU CARRÉ ROUGE 
-    carreRouge = Canvas(VueMenu.root, width=40, height=40, background="red")
+    carreRouge = tk.Canvas(VueMenu.root, width=40, height=40, background="red")
     carreRouge.place(x=420, y=250, anchor=tk.CENTER)
+     # CACHE LE CURSEUR SUR LE CARREÉ ROUGE
+    carreRouge.config(cursor="none")
+
+    
 
 class Mouvement:
 
