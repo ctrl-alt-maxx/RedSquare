@@ -20,7 +20,7 @@ root.config(background="LightSkyBlue1")
 root.title("Jeu du carré rouge")
 
 # Fixe la taille de la fenêtre en px
-root.geometry("850x850")
+root.geometry("800x800")
 
 # DETERMINE LA VITTESE DES FORMES BLEUES AU DÉBUT DU JEU
 class Difficulté:
@@ -131,6 +131,12 @@ class Rectangle:
 
 canvasBase.pack()
 
+def instruction():
+    msg.showinfo(title="Instruction", message="Cliquez et maintenez le carré rouge le plus longtemps possible.")
+
+### TO UNCOMMENT ##
+#instruction()
+
 # Création du carré rouge 
 carreRouge = Canvas(root, width=40, height=40, background="red")
 carreRouge.place(x=420, y=250, anchor=tk.CENTER)
@@ -141,17 +147,26 @@ def glisser(event) :
 
 carreRouge.bind("<B1-Motion>", glisser)
 
-carre = c31.Carre(canvasBase, c31.Vecteur(270, 249), 40, remplissage="green")
-carre.draw()
+
+#carre = c31.Carre(canvasBase, c31.Vecteur(270, 249), 40, remplissage="green")
+#carre.draw()
+
+#def moveGreen(event):
+#    x = event.x
+#    y = event.y
+#    carre.place(x=x, y=y)
+
+
+
 
 def mvt1(forme) :
-    forme.translate(c31.Vecteur(10,0)) 
-    forme.translate(c31.Vecteur(0,10)) 
+    forme.translate(c31.Vecteur(2,0)) 
+    forme.translate(c31.Vecteur(0,2)) 
     forme.draw()
 
 def mvt2(forme) :
-    forme.translate(c31.Vecteur(0,10)) 
-    forme.translate(c31.Vecteur(0,10)) 
+    forme.translate(c31.Vecteur(0,2)) 
+    forme.translate(c31.Vecteur(0,2)) 
     forme.draw()
 
 def mvt3(forme) :
@@ -203,13 +218,24 @@ def motion(event):
     x, y = event.x, event.y
     print('{}, {}'.format(x, y))
 
-carreRouge.bind('<B1-Motion>', glisser)
 
 print("Rectangle1", c31.Rectangle.get_coordonnees(Rectangle.rectangle1))
 print("Rectangle2", c31.Rectangle.get_coordonnees(Rectangle.rectangle2))
 print("Rectangle3", c31.Rectangle.get_coordonnees(Rectangle.rectangle3))
 print("Rectangle4", c31.Rectangle.get_coordonnees(Rectangle.rectangle4))
 #print("rectJaune", c31.Rectangle.get_coordonnees(rectYellow))
+
+def carreRougeOutside(event):
+    print("x: " + carreRouge.str(event.x) + "y : " + carreRouge.str(event.y))
+
+def mouseOutside(event):
+    print("mouse outside")
+
+def mouseIndside(event):
+    print("Mouse inside")
+
+carreRouge.bind("<Enter>", mouseIndside)
+carreRouge.bind("<Leave>", mouseOutside)
 
 
 def toucheEnemie():
@@ -233,10 +259,12 @@ def get_absolute_position(event):
 def endGame():
     msg.showerror(title="error", message="end of game", master=root).show()
 
-def counter():
-    whenToStop = 5000
-    #root.after(whenToStop, root.destroy)
-    endGame()
 
-counter()
+# Permet de detruire le window root 
+root.after(3099, root.destroy)
+
+
+
+
 root.mainloop()
+
