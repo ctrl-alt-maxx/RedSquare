@@ -8,7 +8,6 @@ import random
 
 root = tk.Tk()
 root.title('Tkinter Game')
-# root.resizable(False, False)
 root.geometry('800x800')
 d = dt.datetime.now()
 
