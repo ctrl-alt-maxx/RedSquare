@@ -1,5 +1,3 @@
-import time 
-from time import sleep
 import tkinter as tk
 from tkinter import messagebox as msg
 import datetime as dt
