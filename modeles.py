@@ -1,6 +1,8 @@
 from functools import partial
+from tkinter import Canvas
+import tkinter as tk
 import c31Geometry2 as c31
-from vues import VueJeu
+from vues import VueJeu, VueMenu
 
 class Rectangle :
 
@@ -22,6 +24,12 @@ class Rectangle :
         # 4. RECTANGLE BLEU INFÉRIEUR DROIT 
         en4 = c31.Rectangle(VueJeu.canvasBase, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
         en4.draw()
+
+class CarreRouge() :
+
+    # CRÉATION DU CARRÉ ROUGE 
+    carreRouge = Canvas(VueMenu.root, width=40, height=40, background="red")
+    carreRouge.place(x=420, y=250, anchor=tk.CENTER)
 
 class Mouvement:
 

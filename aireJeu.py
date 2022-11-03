@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import BOTH, Canvas, Message, StringVar, TclError, Variable
 from tkinter import dialog
 from turtle import distance
+
 #import os, sys, tkinter.filedialog
 import c31Geometry2 as c31
 from tkinter import Menu
@@ -111,23 +112,23 @@ canvasBase = tk.Canvas(root, background="white", width=450, height=450, highligh
 #rectYellow = c31.Rectangle(canvasBase, c31.Vecteur(450, 450), 850, 850, remplissage="yellow")
 #rectYellow.draw()
 
-class Rectangle:
+
     # Création des rectangles
     # 1. Rectangle bleu gauche
-    rectangle1 = c31.Rectangle(canvasBase, c31.Vecteur(100, 100), 60, 60, remplissage="mediumblue")
-    rectangle1.draw()
+rectangle1 = c31.Rectangle(canvasBase, c31.Vecteur(100, 100), 60, 60, remplissage="mediumblue")
+rectangle1.draw()
 
     # 2. Rectangle bleu superieur droit
-    rectangle2 = c31.Rectangle(canvasBase, c31.Vecteur(300, 85), 60, 50, remplissage="mediumblue")
-    rectangle2.draw()
+rectangle2 = c31.Rectangle(canvasBase, c31.Vecteur(300, 85), 60, 50, remplissage="mediumblue")
+rectangle2.draw()
 
     # 3. Rectangle bleu inferieur gauche 
-    rectangle3 = c31.Rectangle(canvasBase, c31.Vecteur(85, 350), 30, 60, remplissage="mediumblue")
-    rectangle3.draw()
+rectangle3 = c31.Rectangle(canvasBase, c31.Vecteur(85, 350), 30, 60, remplissage="mediumblue")
+rectangle3.draw()
 
     # 4. Rectangle bleu infereieur droit 
-    rectangle4 = c31.Rectangle(canvasBase, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
-    rectangle4.draw()
+rectangle4 = c31.Rectangle(canvasBase, c31.Vecteur(355, 340), 100, 20, remplissage="mediumblue")
+rectangle4.draw()
 
 
 canvasBase.pack()
@@ -225,10 +226,10 @@ def motion(event):
     print('{}, {}'.format(x, y))
 
 
-print("Rectangle1", c31.Rectangle.get_coordonnees(Rectangle.rectangle1))
-print("Rectangle2", c31.Rectangle.get_coordonnees(Rectangle.rectangle2))
-print("Rectangle3", c31.Rectangle.get_coordonnees(Rectangle.rectangle3))
-print("Rectangle4", c31.Rectangle.get_coordonnees(Rectangle.rectangle4))
+print("Rectangle1", c31.Rectangle.get_coordonnees(rectangle1))
+print("Rectangle2", c31.Rectangle.get_coordonnees(rectangle2))
+print("Rectangle3", c31.Rectangle.get_coordonnees(rectangle3))
+print("Rectangle4", c31.Rectangle.get_coordonnees(rectangle4))
 #print("rectJaune", c31.Rectangle.get_coordonnees(rectYellow))
 
 def carreRougeOutside(event):
@@ -267,8 +268,11 @@ def endGame():
 
 
 # Permet de detruire le window root 
-root.after(3099, root.destroy)
+#root.after(3099, root.destroy)
 
+pos = rectangle1.get_position()
+print("x:" + pos.x)
+print("y:" + pos.y)
 
 
 
