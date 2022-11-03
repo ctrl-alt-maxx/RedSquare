@@ -26,11 +26,12 @@ class LoopEvent:
         #self.vect = vect
         #self.condition = condition
     
-    def stop(self) :
+    def stop(self,when) :
         """Arrête la boucle
         """
-        self.run = False
-   
+        if Polygone.get_barycentre() == when:
+            self.run = False
+        
     def start(self) :
         """Lance l'exécution de la première boucle après un premier interval de la méthode
         """

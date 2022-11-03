@@ -16,29 +16,21 @@ from random import * #lambda: randint(2, 6) > 1
 class Mouvement:
     
     # loop = c31.LoopEvent()
-    
-    
+
+   
     
     def mvt(forme): 
         
-        pos = SH.rectangle1.get_barycentre()
+        pos = forme.get_barycentre()
         
         forme.translate(c31.Vecteur(0,4))
         forme.draw() 
         
-        # print(pos.x)
-        # print(pos.y)
-        def check():
-           
-            if pos.y == 150:
-                Mouvement.loop.stop()
-                
+        print(pos.x)
+        print(pos.y)
         
-        check()
-        
-        
-              
-           
+        loop.stop(pos)
+        #if pos.y <= 150:
             
     # def mvt2(forme): 
     #     forme.translate(c31.Vecteur(4,0))
@@ -50,19 +42,19 @@ class Mouvement:
         
     # def mvt4(forme):
     #     forme.translate(c31.Vecteur(-4,-2))
-    #     forme.draw()
+    #     forme.draw()         
+        
+       
+      
+
     
-   
+    
         
         
     loop = c31.LoopEvent(SH.canvas,partial(mvt,SH.rectangle1),50) 
-    loop.start()
-    
-   
-    
- 
-    
-
+            
+       
+    loop.start()  
     # loop2 = c31.LoopEvent(SH.canvas,partial(mvt2,SH.rectangle2),50)
     # loop2.start()
 
@@ -73,7 +65,7 @@ class Mouvement:
     # loop4.start()
 
     
-        
+    
         
         
         
