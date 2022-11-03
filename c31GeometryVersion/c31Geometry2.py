@@ -4,7 +4,6 @@ import math
 # Permet d'encapsuler une fonction et ses paramètres
 from functools import partial, update_wrapper
 from turtle import pos
-
 class LoopEvent:
     """Cette classe permet de définir une action à exécuter
        après un certain temps (par défaut 500 ms).
@@ -25,6 +24,7 @@ class LoopEvent:
         self.timesleep = timesleep
         #self.shape = shape
         #self.vect = vect
+        #self.condition = condition
     
    
     def start(self) :
@@ -53,8 +53,19 @@ class LoopEvent:
         
       
         callback()
-        #if TS.Verify(event.shape(),event.vect()) == bool(True):
         event.start()
+        #if TS.Verify(event.shape(),event.vect()) == bool(True):
+        # if event.condition() == range(1,4):
+        #     Mouvement.Setstep(1)
+        #     event.start()
+        # elif event.condition() == range(5,9):
+        #     Mouvement.Setstep(1)
+        #     event.start() 
+        # elif event.condition() == range(10,12):
+        #     Mouvement.Setstep(1)
+        #     event.start() 
+         
+
 
     @staticmethod
     def prepareCallback(func, *args, **kwargs):

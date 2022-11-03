@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter.ttk import *
-import c31Geometry2 as c31
+
  
 class GFG:
     def __init__(self, master = None):

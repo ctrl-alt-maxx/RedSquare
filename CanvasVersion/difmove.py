@@ -27,6 +27,7 @@ def restart():
     x1,y1=5,int(c_height/2) # starting position     
     x2,y2=x1+15,y1+15      # starting position     
     my_draw() # start from starting position 
-    b1=tk.Button(my_w,text='Restart',command=lambda:restart())b1.grid(row=2,column=0)
+    b1=tk.Button(my_w,text='Restart',command=lambda:restart())
+    b1.grid(row=2,column=0)
 
 my_w.mainloop()

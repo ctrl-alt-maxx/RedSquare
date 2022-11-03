@@ -1,6 +1,6 @@
 import tkinter as tk
 from turtle import Vec2D, back
-import c31Geometry2 as geo
+import c31GeometryVersion.c31Geometry2 as geo
 import math
 
 def rotation():
