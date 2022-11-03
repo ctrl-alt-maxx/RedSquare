@@ -11,6 +11,7 @@ d = dt.datetime.now()
 
 # name = "Marc"
 # t = random.randrange(1,21)
+
 # # FICHIER CONTENANT LES TEMPS DES PARTIES PRÉCEDENTES
 # f = open("wow.txt", "a")
 # with f:
