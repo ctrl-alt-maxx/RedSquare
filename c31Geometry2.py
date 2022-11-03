@@ -10,7 +10,7 @@ class LoopEvent:
        après un certain temps (par défaut 500 ms).
     """    
 
-    def __init__(self, root,condition, callback = lambda : print("Event"), timesleep = 500) :
+    def __init__(self, root, callback = lambda : print("Event"), timesleep = 500) :
         """Initialise le gestionnaire d'évènement
 
         :param root: Widget parent de notre boucle
@@ -23,9 +23,10 @@ class LoopEvent:
         self.root = root
         self.function = callback
         self.timesleep = timesleep
-        self.condition = condition
-        
-        
+        #self.shape = shape
+        #self.vect = vect
+    
+   
     def start(self) :
         """Lance l'exécution de la première boucle après un premier interval de la méthode
         """
@@ -52,7 +53,7 @@ class LoopEvent:
         
       
         callback()
-        #if event.condition():
+        #if TS.Verify(event.shape(),event.vect()) == bool(True):
         event.start()
 
     @staticmethod
