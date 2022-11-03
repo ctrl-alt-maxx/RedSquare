@@ -270,10 +270,6 @@ def endGame():
 # Permet de detruire le window root 
 #root.after(3099, root.destroy)
 
-pos = rectangle1.get_position()
-print("x:" + pos.x)
-print("y:" + pos.y)
-
 
 
 root.mainloop()
