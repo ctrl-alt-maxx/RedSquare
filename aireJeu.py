@@ -29,10 +29,10 @@ class Difficulté:
     def Facile(self):
         self.defaultSpeed = 1000
        
-        loop1 = c31.LoopEvent(canvasBase, partial(Movement.mvt1, Rectangle.rectangle1), self.defaultSpeed)
-        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2), self.defaultSpeed)
-        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3), self.defaultSpeed)
-        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4), self.defaultSpeed)
+        loop1 = c31.LoopEvent(canvasBase, partial(mvt1, rectangle1), self.defaultSpeed)
+        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, rectangle2), self.defaultSpeed)
+        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, rectangle3), self.defaultSpeed)
+        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, rectangle4), self.defaultSpeed)
 
         loop1.start()
         loop1.start()
@@ -44,10 +44,10 @@ class Difficulté:
         self.defaultSpeed = 200
 
         
-        loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1), self.defaultSpeed)
-        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2), self.defaultSpeed)
-        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3), self.defaultSpeed)
-        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4), self.defaultSpeed)
+        loop1 = c31.LoopEvent(canvasBase, partial(mvt1, rectangle1), self.defaultSpeed)
+        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, rectangle2), self.defaultSpeed)
+        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, rectangle3), self.defaultSpeed)
+        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, rectangle4), self.defaultSpeed)
 
         loop1.start()
         loop2.start()
@@ -57,10 +57,10 @@ class Difficulté:
     def Difficile(self):
         self.defaultSpeed = 50
 
-        loop1 = c31.LoopEvent(canvasBase, partial(mvt1, Rectangle.rectangle1), self.defaultSpeed)
-        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2), self.defaultSpeed)
-        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3), self.defaultSpeed)
-        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4), self.defaultSpeed)
+        loop1 = c31.LoopEvent(canvasBase, partial(mvt1, rectangle1), self.defaultSpeed)
+        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, rectangle2), self.defaultSpeed)
+        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, rectangle3), self.defaultSpeed)
+        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, rectangle4), self.defaultSpeed)
 
         loop1.start()
         loop2.start()
@@ -137,7 +137,7 @@ def instruction():
     msg.showinfo(title="Instruction", message="Cliquez et maintenez le carré rouge le plus longtemps possible.")
 
 ### TO UNCOMMENT ##
-#instruction()
+instruction()
 
 # Création du carré rouge 
 carreRouge = Canvas(root, width=40, height=40, background="red")
@@ -160,48 +160,47 @@ carreRouge.bind("<B1-Motion>", glisser)
 
 
 
-class Movement:
 
-    def mvt1(forme) :
+
+def mvt1(forme) :
         forme.translate(c31.Vecteur(2,0)) 
         forme.translate(c31.Vecteur(0,2)) 
         forme.draw()
 
-    def mvt2(forme) :
+def mvt2(forme) :
         forme.translate(c31.Vecteur(0,2)) 
         forme.translate(c31.Vecteur(0,2)) 
         forme.draw()
 
-    def mvt3(forme) :
+def mvt3(forme) :
         forme.translate(c31.Vecteur(10,0)) 
         forme.translate(c31.Vecteur(10,0)) 
         forme.draw()
 
-    def mvt4(forme):
+def mvt4(forme):
         forme.translate(c31.Vecteur(0,-8)) 
         forme.translate(c31.Vecteur(-8,0)) 
         forme.draw()
 
-    def mvtBack(forme) :
+def mvtBack(forme) :
         forme.translate(c31.Vecteur(0,8))
         forme.translate(c31.Vecteur(8,0))
         forme.draw()
 
-    def loop1() :
-        loop1 = c31.LoopEvent(canvasBase, partial(Movement.mvt1, Rectangle.rectangle1))
-        loop1.start()
 
-    def loop2():
-        loop2 = c31.LoopEvent(canvasBase, partial(mvt2, Rectangle.rectangle2))
-        loop2.start()
+loop1 = c31.LoopEvent(canvasBase, partial(mvt1, rectangle1))
+loop1.start()
 
-    def loop3():
-        loop3 = c31.LoopEvent(canvasBase, partial(mvt3, Rectangle.rectangle3))
-        loop3.start()
 
-    def loop4():
-        loop4 = c31.LoopEvent(canvasBase, partial(mvt4, Rectangle.rectangle4))
-        loop4.start()
+loop2 = c31.LoopEvent(canvasBase, partial(mvt2, rectangle2))
+loop2.start()
+
+loop3 = c31.LoopEvent(canvasBase, partial(mvt3, rectangle3))
+loop3.start()
+
+
+loop4 = c31.LoopEvent(canvasBase, partial(mvt4, rectangle4))
+loop4.start()
 
 go = bool(True)
 
@@ -268,7 +267,7 @@ def endGame():
 
 
 # Permet de detruire le window root 
-#root.after(3099, root.destroy)
+root.after(3099, root.destroy)
 
 
 
