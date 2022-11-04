@@ -4,9 +4,9 @@ import tkinter as tk
 from tkinter import messagebox as msg
 import csv
 import datetime as dt
-from jeuCarreRouge import root1
 
 
+#LA VUE DU MENU
 class VueMenu:
 
     # AFFICHAGE DES CONSIGNES 
@@ -22,24 +22,27 @@ class VueMenu:
     #def setListen(self, eventName, command) :
     #    self.root.bind(eventName, command)
 
-
+#LA VUE DU JEU
 class VueJeu:
     #def __init__(self, root) :
     #    self.root = root
     #    self.playerIndication = tk.Label(root, text="Cliquez sur \"Nouvelle partie\" pour commencer.")
 
-    #CRÉATION DU CANVAS
-    canvasBase = tk.Canvas(root1, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black") 
+    #CRÉATION DU CANVAS / AIRE DE JEU
+    canvasBase = tk.Canvas(root, background="white", width=450, height=450, highlightthickness=50, highlightbackground="black") 
     canvasBase.pack()
 
+    #FERMER LA PAGE
     def destroy(self):
         self.canvas.destroy()
         
-
+    #ENREGISTREMENT DE SCORE    
     def enregistrerScores():
         d = dt.datetime.now()
         t = random.randrange(1, 21)
-        name = "Marc"
+        name = "Marc"    
+
+   
 
         # FICHIER CONTENANT LES TEMPS DES PARTIES PRÉCEDENTES
         f = open("scores.csv", "a")
